@@ -19,11 +19,21 @@ const userSchema = new Schema({
     password:{
         type: String,
         required: true
-    }
+    },
+    cart:[
+        {
+            productId:{
+                type: mongoose.Schema.Types.ObjectId,
+                ref:'Products'
+            },
+            qty: Number
+        }
+    ]
 });
 
 userSchema.statics.findUser = function (findBy, value) {
     return this.model(modelName).findOne({ [findBy]: value });
 };
+
 
 module.exports = mongoose.model(modelName, userSchema);
